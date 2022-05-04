@@ -6,4 +6,5 @@
 FROM linuxserver/qbittorrent
 
 
-
+RUN \
+  touch /a.txt
