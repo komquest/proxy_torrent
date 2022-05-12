@@ -11,7 +11,7 @@ FROM linuxserver/qbittorrent
 RUN \
   touch /a.txt \
   && mkdir /root/.ssh \
-  && chmod 700 /root/.ssh \
+  && chmod 700 /root/.ssh
 
 ARG ssh_pub_key
 
