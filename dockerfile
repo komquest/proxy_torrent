@@ -4,7 +4,7 @@
 
 # Use linuxserver.io as base image (https://hub.docker.com/r/linuxserver/qbittorrent)
 
-# Build like this: docker build ./ -t test_qbittorrent
+# Build like this: docker build ./ -t test_qbittorrent --build-arg ssh_pub_key="Hello World"
 FROM linuxserver/qbittorrent
 
 
