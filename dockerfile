@@ -3,6 +3,8 @@
 # Purpose: Dockerfile used for Torrent Client Build
 
 # Use linuxserver.io as base image (https://hub.docker.com/r/linuxserver/qbittorrent)
+
+# Build like this: docker build ./ -t test_qbittorrent
 FROM linuxserver/qbittorrent
 
 
