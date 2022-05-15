@@ -14,10 +14,10 @@ if [ -z "$1" ] && [ -z "$2" ] && [ -z "$3" ] && [ -z "$4" ]; then
 
 
   # Variables
-  USERNAME = $1
-  SSHSERVER = $2
-  LISTENPORT = $3
-  IMAGENAME = $4
+  USERNAME="$1"
+  SSHSERVER="$2"
+  LISTENPORT="$3"
+  IMAGENAME="$4"
 
 
   echo "<${DATE}><INFO>_Start Build ${IMAGENAME}" >> ${LOG} 2>&1
