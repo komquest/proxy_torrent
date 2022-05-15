@@ -12,3 +12,10 @@ docker run -d \
   --restart unless-stopped \
   test_2
 ```
+
+docker run -d \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Europe/London \
+  --restart unless-stopped \
+  bit_01
