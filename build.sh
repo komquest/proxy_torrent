@@ -9,8 +9,7 @@ DATE=$(date -u +%Y%m%d-%H.%M.%S)
 LOG="/tmp/server.log"
 
 # Check to make sure you have input your variables
-
-if [ -z "$1" ] && [ -z "$2" ] && [ -z "$3" ] && [ -z "$4" ]; then
+if [ ! -z "$1" ] && [ ! -z "$2" ] && [ ! -z "$3" ] && [ ! -z "$4" ]; then
 
 
   # Variables
