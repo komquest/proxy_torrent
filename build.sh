@@ -2,7 +2,7 @@
 # Purpose: This will build the torrent server image. It will create ssh keypair, set username/ip (ssh server) and port (listen port) 
 # and then build using dockerfile. Script args as follows: $1 = username, $2 = ssh server ip, $3 = qbittorent listen port, $4 = ImageName
 # Created By: Komquest
-# Creatred On: 5/15/2022
+# Created On: 5/15/2022
 
 
 DATE=$(date -u +%Y%m%d-%H.%M.%S)

@@ -35,11 +35,14 @@ RUN mkdir /root/.ssh && chmod 700 /root/.ssh
 # Copy over created Private Key 
 COPY ./${image_name} /root/.ssh/
 
-# Copy over config script (start ssh connection, config bittorrent client
-#COPY ./config.sh /root/
+# Create a script that runs upon container startup. I got the information on startup locations from:
+# https://github.com/linuxserver/docker-mods
+# The bind Address and Port are hard coded as shown , did not find a use case that supported modification
 
-# ARG ssh_pub_key
-# RUN echo "$ssh_pub_key" > /root/.ssh/authorized_keys
+RUN echo "#!/usr/bin/with-contenv bash" > /etc/cont-init.d/98-ssh-connect
+RUN echo "ssh -f -N -D 127.0.0.1:2222 -i /root/.ssh/${image_name} ${ssh_user}@${ssh_server}" >> /etc/cont-init.d/98-ssh-connect
+
+# Copy of QBittorrent Config File
 
 # Do a healthcheck???
 
