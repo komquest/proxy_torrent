@@ -40,6 +40,7 @@ if [ ! -z "$1" ] && [ ! -z "$2" ] && [ ! -z "$3" ] && [ ! -z "$4" ]; then
     exit 1
   else
     echo "<${DATE}><INFO>_Built, Please copy ssh public key to remote ssh socks server (${SSHSERVER})" >> ${LOG} 2>&1
+    echo "<${DATE}><INFO>_Built, Please copy ssh public key to remote ssh socks server (${SSHSERVER})"
     exit 0
   fi
 
