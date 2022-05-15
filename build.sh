@@ -10,7 +10,7 @@ LOG="/tmp/server.log"
 
 # Check to make sure you have input your variables
 
-if [] && [] && [] && []; then
+if [ -z "$1" ] && [ -z "$2" ] && [ -z "$3" ] && [ -z "$4" ]; then
 
 
   # Variables
