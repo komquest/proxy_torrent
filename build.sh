@@ -9,14 +9,15 @@ DATE=$(date -u +%Y%m%d-%H.%M.%S)
 LOG="/tmp/server.log"
 
 # Check to make sure you have input your variables
-if [ ! -z "$1" ] && [ ! -z "$2" ] && [ ! -z "$3" ] && [ ! -z "$4" ]; then
+if [ ! -z "$1" ] && [ ! -z "$2" ] && [ ! -z "$3" ] && [ ! -z "$4" ] && [ ! -z "$5" ]; then
 
 
   # Variables
   USERNAME="$1"
   SSHSERVER="$2"
   LISTENPORT="$3"
-  IMAGENAME="$4"
+  SOCKSPORT="$4"
+  IMAGENAME="$5"
 
 
   echo "<${DATE}><INFO>_Start Build ${IMAGENAME}" >> ${LOG} 2>&1
@@ -31,6 +32,7 @@ if [ ! -z "$1" ] && [ ! -z "$2" ] && [ ! -z "$3" ] && [ ! -z "$4" ]; then
   --build-arg ssh_user="${USERNAME}" \
   --build-arg ssh_server="${SSHSERVER}" \
   --build-arg listen_port="${LISTENPORT}" \
+  --build-arg socks_port="${SOCKSPORT}" \
   --build-arg image_name="${IMAGENAME}" \
   >> ${LOG} 2>&1
 
@@ -48,6 +50,6 @@ else
 
   echo "<${DATE}><ERROR>_Please Specify Correct Arguments" >> ${LOG} 2>&1
   echo "<${DATE}><ERROR>_Please Specify Correct Arguments"
-  echo "<${DATE}><Info>_build.sh USERNAME SSHSERVER LISTENPORT IMAGENAME"
+  echo "<${DATE}><Info>_build.sh USERNAME SSHSERVER LISTENPORT SOCKSPORT IMAGENAME"
 
 fi

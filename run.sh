@@ -10,14 +10,15 @@ DATE=$(date -u +%Y%m%d-%H.%M.%S)
 LOG="/tmp/server.log"
 
 # Check to make sure you have input your variables
-if [ ! -z "$1" ] && [ ! -z "$2" ] && [ ! -z "$3" ] && [ ! -z "$4" ]; then
+if [ ! -z "$1" ] && [ ! -z "$2" ] && [ ! -z "$3" ] && [ ! -z "$4" ] && [ ! -z "$5" ]; then
 
 
   # Variables
   IMAGENAME="$1"
   CONTAINERNAME="$2"
   LISTENPORT="$3"
-  DOWNLOADPATH="$4"
+  SOCKSPORT="$4"
+  DOWNLOADPATH="$5"
 
   echo "<${DATE}><INFO>_Start Run: ${IMAGENAME}" >> ${LOG} 2>&1
 
@@ -27,6 +28,7 @@ if [ ! -z "$1" ] && [ ! -z "$2" ] && [ ! -z "$3" ] && [ ! -z "$4" ]; then
   -e PGID=1000 \
   -e TZ=Europe/London \
   -p ${LISTENPORT}:${LISTENPORT} \
+  -p ${SOCKSPORT}:${SOCKSPORT} \
   -v ${DOWNLOADPATH}:/downloads \
   --restart unless-stopped \
   ${IMAGENAME} \
@@ -45,7 +47,7 @@ else
 
   echo "<${DATE}><ERROR>_Please Specify Correct Arguments" >> ${LOG} 2>&1
   echo "<${DATE}><ERROR>_Please Specify Correct Arguments"
-  echo "<${DATE}><Info>_run.sh IMAGENAME CONTAINERNAME LISTENPORT"
+  echo "<${DATE}><Info>_run.sh IMAGENAME CONTAINERNAME LISTENPORT SOCKSPORT DOWNLOADPATH"
 
 fi
 

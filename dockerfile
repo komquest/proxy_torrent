@@ -19,6 +19,10 @@ ENV SSH_SERVER=$ssh_server
 ARG listen_port
 ENV WEBUI_PORT=$listen_port
 
+# Used to specify the SOCKS Listen Port
+ARG socks_port
+ENV SOCKS_PORT=$socks_port
+
 # Used to specify the image name so ssh keys can be copied correctly
 ARG image_name
 
@@ -36,9 +40,10 @@ COPY ./${image_name} /root/.ssh/
 # The bind Address and Port are hard coded as shown , did not find a use case that supported modification
 # Note: I use options to disable host key checking, technically insecure but I don't need a verification prompt
 # to stop my automation
+# Note 2: I make the socks listen on all interfaces so that one can connect to the SOCKS5 (via a browser or other app)
 
 RUN echo "#!/usr/bin/with-contenv bash" > /etc/cont-init.d/98-ssh-connect
-RUN echo "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -f -N -D 127.0.0.1:2222 -i /root/.ssh/${image_name} ${ssh_user}@${ssh_server}" >> /etc/cont-init.d/98-ssh-connect
+RUN echo "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -f -N -D 0.0.0.0:${socks_port} -i /root/.ssh/${image_name} ${ssh_user}@${ssh_server}" >> /etc/cont-init.d/98-ssh-connect
 
 # Copy of QBittorrent Config File, this should already be built and ready to go
 COPY ./qBittorrent.conf /config/
