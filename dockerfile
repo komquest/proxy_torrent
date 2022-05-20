@@ -15,6 +15,10 @@ ENV SSH_USER=$ssh_user
 ARG ssh_server
 ENV SSH_SERVER=$ssh_server
 
+# Used to specify which port ssh will used to connect
+ARG ssh_port
+ENV SSH_PORT=$ssh_port
+
 # Used to spcify the listening port that qbittorrent will listen on
 ARG listen_port
 ENV WEBUI_PORT=$listen_port
@@ -37,7 +41,6 @@ COPY ./${image_name} /root/.ssh/
 
 # Create a script that runs upon container startup. I got the information on startup locations from:
 # https://github.com/linuxserver/docker-mods
-# The bind Address and Port are hard coded as shown , did not find a use case that supported modification
 # Note: I use options to disable host key checking, technically insecure but I don't need a verification prompt
 # to stop my automation
 # Note 2: I make the socks listen on all interfaces so that one can connect to the SOCKS5 (via a browser or other app)

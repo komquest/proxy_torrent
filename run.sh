@@ -1,7 +1,7 @@
 #! /bin/bash
 # Purpose: This will run the previously built docker image.
 # Script args as follows: $1 = Previously built Image Name, $2 = What the Container Name Should be, $3 = qbittorent listen port (this will 
-# open same port on host)
+# open same port on host) $4 = SOCKSPORT, used to conenct a web browser or other app to socks5 $5 = Path used to store local torrent downloads on host
 # Created By: Komquest
 # Created On: 5/15/2022
 

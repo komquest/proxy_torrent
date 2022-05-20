@@ -1,6 +1,8 @@
 #! /bin/bash
 # Purpose: This will build the torrent server image. It will create ssh keypair, set username/ip (ssh server) and port (listen port) 
-# and then build using dockerfile. Script args as follows: $1 = username, $2 = ssh server ip, $3 = qbittorent listen port, $4 = ImageName
+# and then build using dockerfile. Script args as follows: $1 = username, $2 = ssh server ip, $3 = qbittorent listen port, $4 = SOCKS PORT
+# used to connect directly to SOCKS5 proxy, $5 = Port used to connect to remote ssh server, just in case its not the default
+# $6 = The Name docker will give to the Image once built
 # Created By: Komquest
 # Created On: 5/15/2022
 
@@ -9,7 +11,7 @@ DATE=$(date -u +%Y%m%d-%H.%M.%S)
 LOG="/tmp/server.log"
 
 # Check to make sure you have input your variables
-if [ ! -z "$1" ] && [ ! -z "$2" ] && [ ! -z "$3" ] && [ ! -z "$4" ] && [ ! -z "$5" ]; then
+if [ ! -z "$1" ] && [ ! -z "$2" ] && [ ! -z "$3" ] && [ ! -z "$4" ] && [ ! -z "$5" ] && [ ! -z "$6" ]; then
 
 
   # Variables
@@ -17,7 +19,8 @@ if [ ! -z "$1" ] && [ ! -z "$2" ] && [ ! -z "$3" ] && [ ! -z "$4" ] && [ ! -z "$
   SSHSERVER="$2"
   LISTENPORT="$3"
   SOCKSPORT="$4"
-  IMAGENAME="$5"
+  SSHPORT="$5"
+  IMAGENAME="$6"
 
 
   echo "<${DATE}><INFO>_Start Build ${IMAGENAME}" >> ${LOG} 2>&1
@@ -33,6 +36,7 @@ if [ ! -z "$1" ] && [ ! -z "$2" ] && [ ! -z "$3" ] && [ ! -z "$4" ] && [ ! -z "$
   --build-arg ssh_server="${SSHSERVER}" \
   --build-arg listen_port="${LISTENPORT}" \
   --build-arg socks_port="${SOCKSPORT}" \
+  --build-arg ssh_port="${SSHPORT}" \
   --build-arg image_name="${IMAGENAME}" \
   >> ${LOG} 2>&1
 
@@ -50,6 +54,6 @@ else
 
   echo "<${DATE}><ERROR>_Please Specify Correct Arguments" >> ${LOG} 2>&1
   echo "<${DATE}><ERROR>_Please Specify Correct Arguments"
-  echo "<${DATE}><Info>_build.sh USERNAME SSHSERVER LISTENPORT SOCKSPORT IMAGENAME"
+  echo "<${DATE}><Info>_build.sh USERNAME SSHSERVER LISTENPORT SOCKSPORT SSHPORT IMAGENAME"
 
 fi
